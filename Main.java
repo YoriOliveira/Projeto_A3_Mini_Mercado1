@@ -94,6 +94,28 @@ public class Main {
         }
     }
 
+    // Le um CPF valido (aceita com ou sem pontos e traco) e devolve so os numeros
+    static String lerCpf(String msg) {
+        while (true) {
+            String cpf = lerTexto(msg);
+            if (Validador.cpfValido(cpf)) {
+                return Validador.somenteNumeros(cpf);
+            }
+            System.out.println("CPF inválido! Digite os 11 números de um CPF válido (ex: 529.982.247-25).");
+        }
+    }
+
+    // Le um e-mail no formato nome@dominio.com
+    static String lerEmail(String msg) {
+        while (true) {
+            String email = lerTexto(msg);
+            if (Validador.emailValido(email)) {
+                return email;
+            }
+            System.out.println("E-mail inválido! Use o formato nome@dominio.com, sem espaços.");
+        }
+    }
+
     // ===================== PERSISTENCIA CSV =====================
 
     static void carregarProdutos() {
@@ -180,9 +202,11 @@ public class Main {
     }
 
     // Retorna a posicao do cliente no vetor ou -1
+    // Compara so os numeros, entao "123.456.789-09" encontra "12345678909"
     static int buscarCliente(String cpf) {
+        String procurado = Validador.somenteNumeros(cpf);
         for (int i = 0; i < qtdClientes; i++) {
-            if (clientes[i].getCpf().equals(cpf)) return i;
+            if (Validador.somenteNumeros(clientes[i].getCpf()).equals(procurado)) return i;
         }
         return -1;
     }
@@ -338,7 +362,7 @@ public class Main {
 
     static void cadastrarCliente() {
         cabecalho("CADASTRAR CLIENTE");
-        String cpf = lerTexto("Digite o CPF: ");
+        String cpf = lerCpf("Digite o CPF: ");
         if (buscarCliente(cpf) != -1) {
             System.out.println("Ja existe um cliente com esse CPF!");
             pausar();
@@ -346,7 +370,7 @@ public class Main {
         }
         String nome = lerTexto("Digite o Nome: ");
         String telefone = lerTexto("Digite o Telefone: ");
-        String email = lerTexto("Digite o Email: ");
+        String email = lerEmail("Digite o Email: ");
         adicionarClienteVetor(new Cliente(cpf, nome, telefone, email));
         salvarClientes();
         System.out.println("\nCliente cadastrado com sucesso!");
@@ -386,7 +410,7 @@ public class Main {
         System.out.println("Atual: " + clientes[pos]);
         clientes[pos].setNome(lerTexto("Novo Nome: "));
         clientes[pos].setTelefone(lerTexto("Novo Telefone: "));
-        clientes[pos].setEmail(lerTexto("Novo Email: "));
+        clientes[pos].setEmail(lerEmail("Novo Email: "));
         salvarClientes();
         System.out.println("\nCliente alterado com sucesso!");
         pausar();
