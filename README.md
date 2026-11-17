@@ -6,6 +6,7 @@ Sistema de terminal (console) em Java para gerenciar produtos, clientes, compras
 
 - **Produtos:** cadastrar, listar, buscar, alterar e remover
 - **Clientes:** cadastrar, listar, buscar, alterar e remover
+- **Validações:** CPF com dígitos verificadores (aceita com ou sem pontos e traço) e e-mail no formato `nome@dominio.com`
 - **Realizar Compras:** identifica cliente por CPF (opcional), valida estoque, calcula subtotais e total
 - **Controle de Estoque:** listar, repor e ver produtos com estoque baixo
 - **Persistência:** dados salvos em `produtos.csv` e `clientes.csv` e carregados ao iniciar
@@ -17,6 +18,7 @@ MiniMercado/
 ├── Main.java        # menus, CRUDs, compra, estoque e leitura/gravação CSV
 ├── Produto.java     # classe Produto (codigo, nome, preco, estoque)
 ├── Cliente.java     # classe Cliente (cpf, nome, telefone, email)
+├── Validador.java   # validação de CPF e e-mail
 ├── produtos.csv     # dados de exemplo
 ├── clientes.csv     # dados de exemplo
 └── README.md

@@ -27,6 +27,6 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "CPF: " + cpf + " | Nome: " + nome + " | Telefone: " + telefone + " | Email: " + email;
+        return "CPF: " + Validador.formatarCpf(cpf) + " | Nome: " + nome + " | Telefone: " + telefone + " | Email: " + email;
     }
 }
